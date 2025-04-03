@@ -6,17 +6,19 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AcceuilService {
-  private apiUrl = 'https://api.practitest.com/api/v2/projects/30786/runs/16759823/results';
-  private apiKey = '174455332004913c56652903e723bb4e715b4d77';
+  private apiUrl = 'https://api.practitest.com/api/v2/projects/30786/runs';
+  private apiKey = 'ce4752a1a0cf8fe2855ce4f1473fee388e4cbcd3'; 
 
   constructor(private http: HttpClient) {}
 
-  sendTestResults(results: any): Observable<any> {
+  sendTestResults(): Observable<any> {
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.apiKey}`,
-      'Content-Type': 'application/json'
+      'PTToken': this.apiKey, 
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
     });
-    const payload = { test_results: results };
-    return this.http.post(this.apiUrl, payload, { headers });
+    console.log(this.http.get(this.apiUrl, { headers }));
+    
+    return this.http.post(this.apiUrl, { headers });
   }
 }

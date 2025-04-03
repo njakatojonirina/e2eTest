@@ -7,22 +7,13 @@ import { AcceuilService } from './service/acceuil-service';
   imports: [RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-  providers: [AcceuilService]
+  providers: []
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit{
   constructor(private acceuilService: AcceuilService) {}
   title = 'end2endtest';
   ngOnInit(): void {
-    const report = {
-      status: 'success',
-      tests: [
-        { name: 'Test d’accueil', result: 'passed' }
-      ]
-    };
-
-    this.acceuilService.sendTestResults(report).subscribe({
-      next: response => console.log('Rapport envoyé', response),
-      error: err => console.error('Erreur lors de l’envoi', err)
-    });
+    this.acceuilService.sendTestResults()
   }
+
 }
