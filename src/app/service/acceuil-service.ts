@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AcceuilService {
-  private apiUrl = 'https://api.practitest.com/api/v2/projects/30786/runs';
+  private apiUrl = 'https://api.practitest.com/api/v2/projects/30786/tests/16759823';
   private apiKey = 'ce4752a1a0cf8fe2855ce4f1473fee388e4cbcd3'; 
 
   constructor(private http: HttpClient) {}
