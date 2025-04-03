@@ -21,9 +21,9 @@ jobs:
       - name: Install dependencies
         run: |
           npm install
-          npx playwright install
           sudo apt-get update
           sudo apt-get install -y libgtk-4-1 libatomic1 libenchant-2-2 libmanette-0.2-0
+          npx playwright install
 
 
       - name: Build de l'application Angular
@@ -34,10 +34,14 @@ jobs:
           nohup npx ng serve --port 4200 &
           sleep 15  # Attendre que le serveur soit opérationnel
 
-      - name: Exécuter les tests e2e avec Playwright
-        run: npx playwright test
-
-      - name: Déclencher l'envoi des rapports vers Practitest via Angular
+      - name: Export Test Results
         run: |
-          # Appel HTTP vers l'endpoint de l'application qui déclenche le service d'envoi
-          curl http://localhost:4200/api/send-report
+          mkdir -p reports
+          cp -r playwright-report/* reports/
+
+      - name: Send test results to PractiTest
+        run: |
+          curl -H "PTToken: ce4752a1a0cf8fe2855ce4f1473fee388e4cbcd3" \
+          -H "Content-Type: application/json" \
+          -H "Accept: application/json" \
+          "https://api.practitest.com/api/v2/projects/30786/runs"

@@ -17,7 +17,6 @@ export class AcceuilService {
       'Content-Type': 'application/json',
       'Accept': 'application/json'
     });
-    console.log(this.http.get(this.apiUrl, { headers }));
     
     return this.http.post(this.apiUrl, { headers });
   }

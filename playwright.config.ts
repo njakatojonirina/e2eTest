@@ -9,5 +9,9 @@ export default defineConfig({
     viewport: { width: 1280, height: 720 },
     ignoreHTTPSErrors: true,
   },
-  reporter: [['list'], ['json', { outputFile: 'test-results.json' }]],
+  reporter: [
+    ['list'], 
+    ['json', { outputFile: 'test-results.json' }],
+    ['html', { outputFolder: 'playwright-report' }],
+  ],
 });
