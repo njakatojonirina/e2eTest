@@ -6,7 +6,8 @@ import { AcceuilService } from './service/acceuil-service';
   selector: 'app-root',
   imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
+  providers: [AcceuilService]
 })
 export class AppComponent implements OnInit {
   constructor(private acceuilService: AcceuilService) {}
