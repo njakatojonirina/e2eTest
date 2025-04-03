@@ -1,0 +1,38 @@
+name: E2E Tests avec Playwright et Envoi de Rapports via Angular
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  e2e-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Installation des dépendances
+        run: npm install
+
+      - name: Build de l'application Angular
+        run: npm run build
+
+      - name: Lancer le serveur Angular
+        run: |
+          nohup npx ng serve --port 4200 &
+          sleep 15  # Attendre que le serveur soit opérationnel
+
+      - name: Exécuter les tests e2e avec Playwright
+        run: npx playwright test
+
+      - name: Déclencher l'envoi des rapports vers Practitest via Angular
+        run: |
+          # Appel HTTP vers l'endpoint de l'application qui déclenche le service d'envoi
+          curl http://localhost:4200/api/send-report
