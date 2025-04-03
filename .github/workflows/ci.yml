@@ -21,6 +21,7 @@ jobs:
       - name: Install dependencies
         run: |
           npm install
+          npx playwright install
           sudo apt-get update
           sudo apt-get install -y libgtk-4-1 libatomic1 libenchant-2-2 libmanette-0.2-0
 
