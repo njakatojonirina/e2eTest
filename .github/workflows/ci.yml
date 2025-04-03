@@ -34,6 +34,11 @@ jobs:
           nohup npx ng serve --port 4200 &
           sleep 15  # Attendre que le serveur soit opérationnel
 
+      - name: Run Playwright tests
+        run: |
+          npx playwright test
+          npx playwright show-report
+
       - name: Export Test Results
         run: |
           mkdir -p reports
