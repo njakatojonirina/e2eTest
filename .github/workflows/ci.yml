@@ -18,8 +18,12 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Installation des dépendances
-        run: npm install
+      - name: Install dependencies
+        run: |
+          npm install
+          sudo apt-get update
+          sudo apt-get install -y libgtk-4-1 libatomic1 libenchant-2-2 libmanette-0.2-0
+
 
       - name: Build de l'application Angular
         run: npm run build
